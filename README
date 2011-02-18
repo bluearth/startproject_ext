@@ -76,6 +76,9 @@ Here's an example of how to select setting overrides during runtime
 This is simple. Your main setting.py now adds lib to PYTHONPATH. So you can place any
 project spesific 3rd party libraries there and have them added to PYTHONPATH automatically
 
+Do remember though, if your lib is another django app (with models, views, etc) don't forget
+to add it to INSTALLED_APPS in your settings override. 
+
 4. Installation
 
 git clone the repo and add startproject_ext to PYTHONPATH
