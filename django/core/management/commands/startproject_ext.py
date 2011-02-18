@@ -52,8 +52,8 @@ settings_name = 'default'
 # Probe DJANGO_ENV then DJANGO_ENV_<PROJECT_NAME> for settings override name
 if os.environ.get('DJANGO_ENV', False):
     settings_name = os.environ.get('DJANGO_ENV', False)
-elif os.environ.get('DJANGO_ENV_%s' % (PROJECT_NAME.upper()), False):
-    settings_name =  os.environ.get('DJANGO_ENV_%s' % (PROJECT_NAME.upper()), False)
+elif os.environ.get('%s_ENV' % (PROJECT_NAME.upper()), False):
+    settings_name =  os.environ.get('%s_ENV' % (PROJECT_NAME.upper()), False)
 
 # Finally, load settings override
 try:
