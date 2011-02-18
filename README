@@ -1,0 +1,85 @@
+startproject_ext
+-----------------
+
+This is a simple Django command based on django-admin's default startproject command.
+
+It generates extended directory structure, initializes support for multiple settings, and
+support for project-specific 3rdparty libraries. If you have worked with rails before, you 
+might be familiar with this approach. Yes, the idea is heavily borrowed from there.
+
+Contents
+1. Extended directory structure
+2. Multiple settings
+3. Project-spesific 3rd party library
+4. Installation
+5. TODO
+
+
+1. Extended directory structure
+
+Instead of generating the usual, this command genereates the  following directory 
+structure:
+
+<project_name>
+|-- config/
+|   |-- __init__.py
+|   |-- settings/
+|   |   |-- default.py
+|   |   |-- development.py
+|   |   |-- __init__.py
+|   |   |-- production.py
+|   |   |-- test.py
+|   `-- wsgi/
+|-- db/
+|-- __init__.py
+|-- lib/
+|-- manage.py
+|-- settings.py
+`-- urls.py
+
+The new directory structure provides cleaner layout by providing their own compartments for 
+database files (sqlite), 3rd party libraries, wsgi config, and multiple settings overrides
+
+2. Multiple settings
+
+By using startproject_ext instead of the usual startproject, your generated settings.py will 
+be modified to support multiple setting overrides.
+
+Setting overrides are python modules that overrides variables defined in main settings.py and
+placed under config/settings directory.
+
+This new approach requires that main settings.py is not to be edited directly. Instead, 
+you can edit the default overrides in config/settings/default.py. Or one of the recomended
+modules provided there. You can even provide your own.
+
+Which overrides will eventually be loaded is be determined by the value of <PROJECTNAME>_ENV 
+environment variable or from the command line (see TODO). 
+
+Here's an example of how to select setting overrides during runtime
+
+|# django-admin startproject candi
+|# cd candi
+|# export CANDI_ENV = test
+|# ./manage.py sycndb
+|# ./manage.py runserver
+
+3. 3rd party library
+
+This is simple. Your main setting.py now adds lib to PYTHONPATH. So you can place any
+project spesific 3rd party libraries there and have them added to PYTHONPATH automatically
+
+4. Installation
+
+git clone the repo and add startproject_ext to PYTHONPATH
+
+# cd ~
+# git-clone 
+# export PYTHONPATH=/home/bluearth/startproject_ext:$PYTHONPATH
+
+
+# TODO
+
+1. Provide painless and platform independent setup. Perhaps using python egg?
+2. Overrides should append/update to list, tuple, dict values instead of replacing them.
+3. Choose setting override via command line parameter
+
