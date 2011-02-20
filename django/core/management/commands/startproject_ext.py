@@ -42,7 +42,7 @@ sys.path.insert(0, os.path.join(PROJECT_ROOT, 'lib'))
 
 # First asserts that default.py exists
 try:
-    assert os.path.exists(os.path.join('config','settings','default.py'))
+    assert os.path.exists(os.path.join(PROJECT_ROOT, 'config','settings','default.py'))
 except AssertionError:
     raise ImproperlyConfigured("Something wen't very wrong. There should be a config/settings/default.py")
 
